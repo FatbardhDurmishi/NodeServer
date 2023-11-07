@@ -8,7 +8,7 @@ const bodyParser = require("body-parser");
 // const expressHbs = require("express-handlebars");
 
 const errorController = require("./controllers/error");
-const db = require("./util/database");
+const sequelize = require("./util/database");
 
 // function requestListener(req, res) {
 
@@ -38,6 +38,16 @@ app.use("/admin", adminRoutes);
 app.use(shopRoutes);
 
 app.use(errorController.get404);
+
+sequelize
+  .sync()
+  .then((result) => {
+    // console.log(result);
+    app.listen(3000);
+  })
+  .catch((err) => {
+    console.log(err);
+  });
 
 //allows us to add new middleware functions
 //next is a function that will e passed to the function that app.use accepts
@@ -72,6 +82,5 @@ app.use(errorController.get404);
 
 //is called by nodejs whenever a request reaches our server
 // const server = http.createServer(app);
-app.listen(3000);
 
 // server.listen(3000);
