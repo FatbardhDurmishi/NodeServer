@@ -198,7 +198,7 @@ exports.postOrder = (req, res, next) => {
 
 exports.getOrders = (req, res, next) => {
   req.user
-    // sikur ne .net include dmth si innej join me bo ne MySql
+    // sikur ne .net include dmth si inner join me bo ne MySql
     .getOrders({ include: ["products"] })
     .then((orders) => {
       console.log(orders);
